@@ -5,14 +5,16 @@ import Todo from "./Todo";
 interface Props {
   todos: ListOfTodos;
   onRemoveTodo: (id: number) => void;
+  onChangeStatus: (id: number) => void;
+
 }
 
-export const Todos: React.FC<Props> = ({ todos, onRemoveTodo }) => {
+export const Todos: React.FC<Props> = ({ todos, onRemoveTodo, onChangeStatus }) => {
   const completed = "bg-slate-200/80  rounded-xl line-through";
 
   return (
     <>
-    <ul className="space-y-3  w-full">
+    <ul className="space-y-3  w-full py-2">
       {todos.map((todo, index) => (
         <div className="flex" key={index}>
           <li
@@ -23,6 +25,8 @@ export const Todos: React.FC<Props> = ({ todos, onRemoveTodo }) => {
               title={todo.title}
               complete={todo.complete}
               id={todo.id}
+              handleChangeStatus={() => onChangeStatus(todo.id)}
+
             />
           </li>
           <button onClick={() => onRemoveTodo(todo.id)} className="pb-1 me-4">
