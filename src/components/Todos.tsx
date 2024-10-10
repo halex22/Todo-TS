@@ -14,11 +14,11 @@ export const Todos: React.FC<Props> = ({ todos, onRemoveTodo, onChangeStatus }) 
 
   return (
     <>
+
     <ul className="space-y-3  w-full py-2">
       {todos.map((todo, index) => (
         <div className="flex" key={index}>
-          <li
-            
+          <li            
             className={`${todo.complete ? completed : ""} p-2  border-b-2  w-full`}
           >
             <Todo
