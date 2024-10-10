@@ -58,7 +58,7 @@ const App = () : JSX.Element => {
     
       <div className="flex justify-center border-4 shadow-lg rounded-xl bg-white">
         
-        <Todos todos={todos} onRemoveTodo={handleRemove} onChangeStatus={changeTodoStatus}/>
+        <Todos todos={todos} onRemoveTodo={handleRemove} onChangeStatus={changeTodoStatus} filter={filter}/>
       </div>
 
       <AddTodo onAddTodo={handleAdd}/>
