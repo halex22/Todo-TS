@@ -1,9 +1,8 @@
-import { type Todo as TodoType } from "../types"
+import { type Todo as TodoType } from "../types";
 
 interface Props extends TodoType {
   handleChangeStatus: () => void;
 }
-
 
 const Todo: React.FC<Props> = ({ id, title, complete, handleChangeStatus }) => {
   return (
@@ -16,7 +15,8 @@ const Todo: React.FC<Props> = ({ id, title, complete, handleChangeStatus }) => {
       />
       <label> {title} </label>
     </div>
-  )
-}
 
-export default Todo
+  );
+};
+
+export default Todo;

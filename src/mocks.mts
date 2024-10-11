@@ -7,17 +7,17 @@ type todoElement = {
 const mockTodo: Array<todoElement> = [
   {
     id: 1,
-    title: 'First Todo',
+    title: 'This is the first Todo',
     complete: false
   },
   {
     id: 2,
-    title: 'Second Todo',
+    title: ' <-- click on this button to mark as completed',
     complete: true
   },
   {
     id: 3,
-    title: 'Third Todo',
+    title: 'click on the "x" to delete the Todo --->',
     complete: false
   }
 ]
