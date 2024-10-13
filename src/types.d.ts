@@ -19,6 +19,11 @@ export interface TodosProps {
   filter: filterValue;
 }
 
+export interface baseTodoReturn {
+  handleAdd: (title: string) => void;
+  changeTodoStatus: (id: number) => void;
+  handleRemove: (id: number) => void;
+}
 
 
 export type ListOfTodos = Todo[]

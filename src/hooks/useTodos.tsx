@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
 import { type ListOfTodos } from "../types";
 import { type Todo as TodoType } from "../types"
+import { baseTodoReturn } from "../types";
 import mockTodo from "../mocks.mts";
 
-
-export interface baseTodoReturn {
-  handleAdd: (title: string) => void;
-  changeTodoStatus: (id: number) => void;
-  handleRemove: (id: number) => void;
-}
 
 interface useTodoReturn extends baseTodoReturn {
   todos: ListOfTodos;
