@@ -1,51 +1,17 @@
-import { useEffect, useState } from "react"
 import Header from "./components/common/header"
-import mockTodo from "./mocks.mts"
 import { Todos } from "./components/Todos"
 import { AddTodo } from "./components/addTodo"
 import { FilterBtns } from "./components/filterBtns"
-import { filterValue } from "./types"
-import { type Todo as TodoType } from "./types"
+import { useTodosContext } from "./hooks/useTodosContext"
+import { useFilteredTodosContext } from "./hooks/useFilteredTodosContext"
+
 
 const App = () : JSX.Element => {
 
-  const [ todos, setTodos ] = useState(mockTodo) 
-  const [ completedNumber, setCompletedNumber ] = useState<number>(0)
-  const [ filter, setFilter ] = useState<filterValue>('all')
+  const {filteredTodos: todos } = useFilteredTodosContext()
+  const {handleAdd} = useTodosContext()
 
-  const handleFilterChange = (newFilterValue: filterValue) => {
-    setFilter(newFilterValue)
-  }
-
-  const handleRemove = (id: number): void => {
-    const newTodos = todos.filter(todo => todo.id !== id)
-    setTodos(newTodos)
-  }
-
-
-  const handleAdd = (title: string): void => {
-    if (!title) return
-    const lastIndex = todos[todos.length -1 ].id
-    const newTodo: TodoType = {
-      id: lastIndex + 1,
-      title: title,
-      complete: false
-    }
-    setTodos((prevState) => [...prevState, newTodo])
-  }
-
-  const changeTodoStatus = (id: number): void => {
-    const oldTodos = structuredClone(todos) 
-    oldTodos.forEach(todo => {
-      if (todo.id === id) todo.complete = !todo.complete
-    })
-    setTodos(oldTodos)
-  }
-
-  useEffect(() => {
-    const completedTodos = todos.filter(todo => todo.complete)
-    setCompletedNumber(completedTodos.length)
-  }, [todos])
+  const completedNumber = 1
 
   return (
     <>
@@ -54,11 +20,11 @@ const App = () : JSX.Element => {
 
     <div className="mx-[5%] md:mx-[20%] lg:mx-[25%]">
 
-      <FilterBtns changeFilter={handleFilterChange} currentFilter={filter}/>
+      <FilterBtns />
     
       <div className="flex justify-center border-4 shadow-lg rounded-xl bg-white">
         
-        <Todos todos={todos} onRemoveTodo={handleRemove} onChangeStatus={changeTodoStatus} filter={filter}/>
+        <Todos/>
       </div>
 
       <AddTodo onAddTodo={handleAdd}/>

@@ -2,11 +2,11 @@
 import React from "react"
 import { type filterValue } from "../types"
 import { TODO_FILTERS } from "../const"
+import { useFilteredTodosContext } from "../hooks/useFilteredTodosContext"
 
-interface Props {
-  changeFilter: (filter: filterValue) => void
-  currentFilter: filterValue
-}
+// interface Props {
+//   changeFilter: (filter: filterValue) => void
+// }
 
 interface BtnProps {
   text: filterValue;
@@ -14,7 +14,9 @@ interface BtnProps {
 }
 
 
-export const FilterBtns: React.FC<Props> = ({ changeFilter, currentFilter }) => {
+export const FilterBtns: React.FC = () => {
+
+  const {filter: currentFilter, handleFilterChange: changeFilter} = useFilteredTodosContext()
   return (
   <section className="px-2 space-x-4 flex justify-end">
     { Object.entries(TODO_FILTERS).map(([key, value], index) => (

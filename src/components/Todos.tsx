@@ -1,6 +1,7 @@
 import React from "react";
-import { TodosProps as Props } from "../types";
 import Todo from "./Todo";
+import { useFilteredTodosContext } from "../hooks/useFilteredTodosContext";
+import { useTodosContext } from "../hooks/useTodosContext";
 
 
 const noTodosMessage = {
@@ -9,20 +10,13 @@ const noTodosMessage = {
   all: "Please add Todos to your list",
 };
 
-export const Todos: React.FC<Props> = ({
-  todos,
-  onRemoveTodo,
-  onChangeStatus,
-  filter,
-}) => {
+export const Todos: React.FC = () => {
+
+  const {filteredTodos, filter} = useFilteredTodosContext()
+  const {handleRemove: onRemoveTodo, changeTodoStatus: onChangeStatus} = useTodosContext()
+
   const completed =
     "bg-slate-200/80  rounded-xl line-through decoration-slate-800 decoration-double";
-
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === "all") return true;
-    if (filter === "active") return !todo.complete;
-    if (filter === "completed") return todo.complete;
-  });
 
   return (
     <ul className="space-y-3  w-full py-2">

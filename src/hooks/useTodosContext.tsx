@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { TodosContext } from "../context/todosContext";
-import { type baseTodoReturn } from "../types";
+import { type useTodosContextProps } from "../types";
 
 // export const useTodosContext()
-export const useTodosContext = (): baseTodoReturn => {
+export const useTodosContext = (): useTodosContextProps => {
     const context = useContext(TodosContext)
 
     if (!context) {

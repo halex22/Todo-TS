@@ -25,6 +25,10 @@ export interface baseTodoReturn {
   handleRemove: (id: number) => void;
 }
 
+export interface useTodosContextProps extends baseTodoReturn {
+  todos: ListOfTodos
+}
+
 
 export type ListOfTodos = Todo[]
 

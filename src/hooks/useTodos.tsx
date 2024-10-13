@@ -20,6 +20,8 @@ export const useTodos = (): useTodoReturn => {
 
   const handleAdd = (title: string): void => {
     if (!title) return
+    console.log('adding')
+    console.log(todos.length)
     const lastIndex = todos[todos.length -1 ]?.id ?? 0
     const newTodo: TodoType = {
       id: lastIndex + 1,
