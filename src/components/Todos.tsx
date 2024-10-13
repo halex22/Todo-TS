@@ -1,13 +1,6 @@
 import React from "react";
-import { type ListOfTodos, type filterValue } from "../types";
+import { TodosProps as Props } from "../types";
 import Todo from "./Todo";
-
-interface Props {
-  todos: ListOfTodos;
-  onRemoveTodo: (id: number) => void;
-  onChangeStatus: (id: number) => void;
-  filter: filterValue;
-}
 
 
 const noTodosMessage = {

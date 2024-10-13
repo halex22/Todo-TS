@@ -52,7 +52,7 @@ const App = () : JSX.Element => {
     
     <Header title="Welcome my ToDo app" />
 
-    <div className="mx-[10%] md:mx-[20%] lg:mx-[25%]">
+    <div className="mx-[5%] md:mx-[20%] lg:mx-[25%]">
 
       <FilterBtns changeFilter={handleFilterChange} currentFilter={filter}/>
     

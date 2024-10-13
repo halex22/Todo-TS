@@ -6,6 +6,21 @@ export interface Todo {
   complete: boolean
 }
 
+export interface useFilteredTodosReturn {
+  filteredTodos: ListOfTodos;
+  filter: filterValue;
+  handleFilterChange: (newFilterValue: filterValue) => void
+}
+
+export interface TodosProps {
+  todos: ListOfTodos;
+  onRemoveTodo: (id: number) => void;
+  onChangeStatus: (id: number) => void;
+  filter: filterValue;
+}
+
+
+
 export type ListOfTodos = Todo[]
 
 
