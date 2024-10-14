@@ -35,6 +35,14 @@ export const TodosProvider: React.FC<{ children: React.ReactNode}> = ({ children
     setTodos(oldTodos)
   }
 
+  const handleEditTodo = (id: number, newTitle: string): void => {
+    const oldTodos = structuredClone(todos)
+    oldTodos.forEach(todo => {
+      if (todo.id === id) todo.title = newTitle
+    })
+    setTodos(oldTodos)
+  }
+
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
     if (savedTodos) {
@@ -50,6 +58,7 @@ export const TodosProvider: React.FC<{ children: React.ReactNode}> = ({ children
           handleAdd,
           handleRemove,
           changeTodoStatus,
+          handleEditTodo,
           todos
         }}
       >

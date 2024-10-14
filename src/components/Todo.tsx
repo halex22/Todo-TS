@@ -1,37 +1,52 @@
 import React, { useState } from "react";
 import { useTodosContext } from "../hooks/useTodosContext";
 import { type Todo as TodoType } from "../types";
+import { useEditTodo } from "../hooks/useEditTodo";
 
 interface RemoveBtnProps {
   id:  number
 }
 
-interface EditTodoProps extends RemoveBtnProps {
+interface MinTodoProps {
   title: string
+  id: number
+}
+
+
+interface EditComponentProps extends MinTodoProps {
+  toggleFunction: () => void
 }
 
 
 const Todo: React.FC<TodoType> = ({ id, title, complete }) => {
+
   const [ beenModified, setBeenModified ] = useState<boolean>(false)
+
+  const {currentTodoTitleValue, saveChanges, handleInputChange} = useEditTodo(title)
 
   const toggleEdit = (): void => {
     setBeenModified((prevState) => !prevState)
   }
 
   return (
-    <div className="flex justify-between">
-      {beenModified ? <DisplayEditTodo title={title} id={id}/> :
-      <DisplayTodo id={id} title={title} complete={complete}/> }
-      
-      
-      <div>
-        {beenModified ? <button onClick={toggleEdit}>✔️</button> : 
-        <button onClick={toggleEdit}>✏️</button>}
+    <>      
+      {beenModified && (
+        <div className="flex">
+        <DisplayEditTodo title={title} id={id} toggleFunction={toggleEdit}/>
+        <button onClick={toggleEdit}>✔️</button>
+        </div>
+      )}
 
-        <RemoveBtn id={id} />
-      </div>
-    
-    </div>
+      {!beenModified && (
+        <div className="flex justify-between">
+          <DisplayTodo id={id} title={title} complete={complete}/>
+          <div className="space-x-1">
+            <button onClick={toggleEdit}>✏️</button>
+            <RemoveBtn id={id} />
+          </div>
+        </div>        
+      )}    
+    </>
 
   );
 };
@@ -60,13 +75,30 @@ const DisplayTodo: React.FC<TodoType> = ({ id, complete, title}) => {
 const RemoveBtn: React.FC<RemoveBtnProps> = ({ id }) => {
   const {handleRemove: onRemoveTodo} = useTodosContext()
   return (
-    <button onClick={() => onRemoveTodo(id)} className="me-4">
+    <button onClick={() => onRemoveTodo(id)} >
       <span className=" text-slate-400 hover:text-red-400 h-full">🗙</span>
     </button>
   )
 }
 
-const DisplayEditTodo: React.FC<EditTodoProps> = ({ title }) => {
+
+
+
+const EditBtn: React.FC<EditBtnProps> = ({ toggleFunction, newTitle, id }) => {
+  const { handleEditTodo } = useTodosContext()
+
+  const handleTodosTitleChange = (): void => {
+    toggleFunction()
+    handleEditTodo(id, newTitle)
+  }
+
+  return (
+    <button onClick={handleTodosTitleChange}>✔️</button>
+  )
+}
+
+
+const DisplayEditTodo: React.FC<EditComponentProps> = ({ title, id, toggleFunction }) => {
   const [ todoTitle, setTodoTitle ] = useState<string>(title)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

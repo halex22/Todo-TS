@@ -23,6 +23,7 @@ export interface baseTodoReturn {
   handleAdd: (title: string) => void;
   changeTodoStatus: (id: number) => void;
   handleRemove: (id: number) => void;
+  handleEditTodo: (id: number, newTitle: string) => void
 }
 
 export interface useTodosContextProps extends baseTodoReturn {
