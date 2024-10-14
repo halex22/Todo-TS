@@ -7,14 +7,9 @@ interface RemoveBtnProps {
   id:  number
 }
 
-interface MinTodoProps {
+interface EditComponentProps {
   title: string
-  id: number
-}
-
-
-interface EditComponentProps extends MinTodoProps {
-  toggleFunction: () => void
+  handleChange: (newTodoValue: string) => void
 }
 
 
@@ -32,11 +27,15 @@ const Todo: React.FC<TodoType> = ({ id, title, complete }) => {
     <>      
       {beenModified && (
         <div className="flex">
-        <DisplayEditTodo title={title} id={id} toggleFunction={toggleEdit}/>
-        <button onClick={toggleEdit}>✔️</button>
+        <DisplayEditTodo title={currentTodoTitleValue}  handleChange={handleInputChange}/>
+        <button onClick={() => {
+          toggleEdit()
+          saveChanges(id)
+        }}>✔️</button>
         </div>
       )}
 
+      
       {!beenModified && (
         <div className="flex justify-between">
           <DisplayTodo id={id} title={title} complete={complete}/>
@@ -71,7 +70,6 @@ const DisplayTodo: React.FC<TodoType> = ({ id, complete, title}) => {
 }
 
 
-
 const RemoveBtn: React.FC<RemoveBtnProps> = ({ id }) => {
   const {handleRemove: onRemoveTodo} = useTodosContext()
   return (
@@ -82,33 +80,16 @@ const RemoveBtn: React.FC<RemoveBtnProps> = ({ id }) => {
 }
 
 
+const DisplayEditTodo: React.FC<EditComponentProps> = ({ title, handleChange }) => {
 
-
-const EditBtn: React.FC<EditBtnProps> = ({ toggleFunction, newTitle, id }) => {
-  const { handleEditTodo } = useTodosContext()
-
-  const handleTodosTitleChange = (): void => {
-    toggleFunction()
-    handleEditTodo(id, newTitle)
-  }
-
-  return (
-    <button onClick={handleTodosTitleChange}>✔️</button>
-  )
-}
-
-
-const DisplayEditTodo: React.FC<EditComponentProps> = ({ title, id, toggleFunction }) => {
-  const [ todoTitle, setTodoTitle ] = useState<string>(title)
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setTodoTitle(event.target.value)
+  const userInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleChange(event.target.value)
   }
 
   return (
     <>
-    <input type="text" value={todoTitle} onChange={handleChange}
-      className="focus:outline-none border-slate-300 border-[1px] rounded-lg ps-2"
+    <input type="text" value={title} onChange={userInputChange}
+      className="focus:outline-none border-slate-300 border-[1px] rounded-lg ps-2 w-full"
     />
     </>
   )
