@@ -1,12 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react"
 import { type filterValue } from "../types"
 import { TODO_FILTERS } from "../const"
 import { useFilteredTodosContext } from "../hooks/useFilteredTodosContext"
 
-// interface Props {
-//   changeFilter: (filter: filterValue) => void
-// }
 
 interface BtnProps {
   text: filterValue;
@@ -19,7 +15,7 @@ export const FilterBtns: React.FC = () => {
   const {filter: currentFilter, handleFilterChange: changeFilter} = useFilteredTodosContext()
   return (
   <section className="px-2 space-x-4 flex justify-end">
-    { Object.entries(TODO_FILTERS).map(([key, value], index) => (
+    { Object.entries(TODO_FILTERS).map(([, value], index) => (
       <div key={index} className={`border-2 rounded-lg ${currentFilter === value ? 'border-green-600' : 'border-white'}`}>
         <Btn text={value} setFilterOnClick={() => {changeFilter(value as filterValue)}} />
       </div>

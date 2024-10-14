@@ -11,7 +11,7 @@ const App = () : JSX.Element => {
     <>    
     <Header title="Welcome my ToDo app" />
 
-    <div className="mx-[5%] md:mx-[20%] lg:mx-[25%]">
+    <div className="mx-[5%] md:mx-[7%] lg:mx-[10%]">
       <FilterBtns />    
 
       <div className="flex justify-center border-4 shadow-lg rounded-xl bg-white">

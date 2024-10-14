@@ -6,7 +6,11 @@ export default {
     "./src/*.tsx"
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'xs':  '320px'
+      }
+    },
   },
   plugins: [],
 }

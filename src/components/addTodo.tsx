@@ -12,7 +12,7 @@ export const AddTodo: React.FC = () => {
   };
 
   return (
-    <div className="my-2 space-x-4 ps-1">
+    <div className="my-2 space-x-4 space-y-2 ps-1 flex sm:block flex-col items-center">
       <label htmlFor="" className="text-slate-500 font-bold">
         New Todo{" "}
       </label>
@@ -23,15 +23,18 @@ export const AddTodo: React.FC = () => {
         value={inputValue}
         onChange={handleChange}
       />
-      <button
-        className="border-2 px-2 py-1 rounded-lg bg-slate-200 hover:bg-slate-300"
-        onClick={() => {
-          onAddTodo(inputValue);
-          setInputValue('')
-        }}
-      >
-        <span className="text-slate-500 font-bold">Add</span>
-      </button>
+      <div className="inline">
+        <button
+          className="border-2 px-2 py-1 rounded-lg bg-slate-200 hover:bg-slate-300"
+          onClick={() => {
+            onAddTodo(inputValue);
+            setInputValue('')
+          }}
+        >
+          <span className="text-slate-500 font-bold">Add</span>
+        </button>
+      </div>
+
     </div>
   );
 };

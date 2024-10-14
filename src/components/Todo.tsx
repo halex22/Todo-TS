@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useTodosContext } from "../hooks/useTodosContext";
 import { type Todo as TodoType } from "../types";
 import { useEditTodo } from "../hooks/useEditTodo";
+import { PencilSvg } from "./svg/pencil";
+import { DeleteSvg } from "./svg/delete";
 
 interface RemoveBtnProps {
   id:  number
@@ -36,10 +38,12 @@ const Todo: React.FC<TodoType> = ({ id, title, complete }) => {
       )}
 
       {!beenModified && (
-        <div className="flex justify-between">
+        <div className="block xs:flex justify-between">
           <DisplayTodo id={id} title={title} complete={complete}/>
-          <div className="space-x-1">
-            <button onClick={toggleEdit}>✏️</button>
+          <div className="space-x-1 flex justify-center">
+            <button onClick={toggleEdit}>
+              <PencilSvg />
+            </button>
             <RemoveBtn id={id} />
           </div>
         </div>        
@@ -73,7 +77,8 @@ const RemoveBtn: React.FC<RemoveBtnProps> = ({ id }) => {
   const {handleRemove: onRemoveTodo} = useTodosContext()
   return (
     <button onClick={() => onRemoveTodo(id)} >
-      <span className=" text-slate-400 hover:text-red-400 h-full">🗙</span>
+      <DeleteSvg />
+      {/* <span className=" text-slate-400 hover:text-red-400 transition-colors duration-300 h-full">🗙</span> */}
     </button>
   )
 }
