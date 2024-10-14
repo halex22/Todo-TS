@@ -4,6 +4,7 @@ export interface Todo {
   id: number,
   title: string,
   complete: boolean
+  addedByUser?: boolean 
 }
 
 export interface useFilteredTodosReturn {
@@ -28,6 +29,7 @@ export interface baseTodoReturn {
 
 export interface useTodosContextProps extends baseTodoReturn {
   todos: ListOfTodos
+  restoreInstructions: () => void
 }
 
 

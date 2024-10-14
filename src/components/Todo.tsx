@@ -35,7 +35,6 @@ const Todo: React.FC<TodoType> = ({ id, title, complete }) => {
         </div>
       )}
 
-      
       {!beenModified && (
         <div className="flex justify-between">
           <DisplayTodo id={id} title={title} complete={complete}/>
@@ -64,7 +63,7 @@ const DisplayTodo: React.FC<TodoType> = ({ id, complete, title}) => {
       onChange={() => handleChangeStatus(id)}
       className={``}
     />
-    <label className={`ps-1 ${complete && completedStyles}`}> {title} </label>
+    <label className={`px-4 ${complete && completedStyles}`}> {title} </label>
   </div>
   )
 }

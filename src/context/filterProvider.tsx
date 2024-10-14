@@ -14,7 +14,6 @@ export const FilteredTodosProvider: React.FC<{ children: React.ReactNode}> = ({ 
   }
 
   useEffect(() => {
-    console.log(todos.length)
     const filterResult = todos.filter(todo => {
       if (filter === 'all') return true
       if (filter === 'active') return !todo.complete

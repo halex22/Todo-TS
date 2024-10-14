@@ -6,7 +6,7 @@ export const FooterSummary: React.FC = () => {
 
   const [ completedTodos, setCompletedTodos] = useState<number>(0)
 
-  const { todos } = useTodosContext()
+  const { todos, restoreInstructions } = useTodosContext()
 
   useEffect(() => {
     const completed = todos.reduce((count, todo) => {
@@ -20,6 +20,13 @@ export const FooterSummary: React.FC = () => {
       <small className="font-bold">
           Completed {completedTodos} of Total {todos.length} 
         </small>
+
+        <div>
+          <button onClick={restoreInstructions}>
+            <small className="hover:underline underline-offset-2">Restore instructions</small>
+          </button>
+        </div>
+
     </footer>
   )
 }

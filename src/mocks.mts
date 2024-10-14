@@ -4,10 +4,12 @@ type todoElement = {
   complete: boolean
 }
 
+// import { type ListOfTodos } from "./types"
+
 const mockTodo: Array<todoElement> = [
   {
     id: 1,
-    title: 'This is the first Todo',
+    title: 'This is the first Todo, click the pencil to edit --> ',
     complete: false
   },
   {
